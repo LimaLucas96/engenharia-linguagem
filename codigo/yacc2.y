@@ -21,12 +21,15 @@ Perguntar ao professor essa parte, com fica para tipagem no codigo
 // %token <iValue> NUMBER
 
 %token INT FLOAT CHAR DOUBLE VOID
-%token FOR WHILE
+%token FOR WHILE DO
 %token IF ELSE 
 %token BLOCK_BEGIN BLOCK_END LEFT_PARENTHESIS RIGHT_PARENTHESIS LEFT_COCHETE RIGHT_COCHETE SEMI ASSIGN COMMA
 %token PLUS MINUS TIMES DIVIDE LE GE NE EQ GT LT
 %token STRUCT
 %token NUMBER ID
+
+%right ASSIGN
+%left LE GE EQ NE LT GT
 
 %start prog
 
@@ -92,7 +95,7 @@ stmtlist: stmtlist stmt { }
     ;
 
 stmt: whileStmt { }
-    | declarationStmt { }
+    | dec { }
     | forStmt { }
     | ifStmt { }
     | SEMI
@@ -132,11 +135,11 @@ expr: expr LE expr { }
 
 %%
 
-int main (void) {
-	return yyparse ( );
+int main(void){
+   return yyparse ( );
 }
 
-int yyerror (char *msg) {
-	fprintf (stderr, "%d: %s em '%s'\n", yylineno, msg, yytext);
-	return 0;
+int yyerror(char *s) {
+    printf("%d : %s %s\n", yylineno, s, yytext );
+    return 0;
 }

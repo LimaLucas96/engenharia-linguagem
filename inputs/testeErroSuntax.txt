@@ -1,0 +1,4 @@
+int main() inicio
+    int teste = ;
+    teste = teste + 1;
+fim
