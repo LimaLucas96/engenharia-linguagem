@@ -29,7 +29,8 @@ Perguntar ao professor essa parte, com fica para tipagem no codigo
 %token NUMBER ID
 
 %right ASSIGN
-%left LE GE EQ NE LT GT
+%left LE GE EQ
+%left NE LT GT
 
 %start prog
 
@@ -87,7 +88,10 @@ argList: argList COMMA arg { }
 arg: type ID {}
     ;
 
-CompoundStmt: BLOCK_BEGIN stmtlist BLOCK_END {}
+CompoundStmt: BLOCK_BEGIN ID stmtlist BLOCK_END ID {} 
+    | BLOCK_BEGIN WHILE stmtlist BLOCK_END WHILE {}
+    | BLOCK_BEGIN FOR stmtlist BLOCK_END FOR {}
+    | BLOCK_BEGIN IF stmtlist BLOCK_END IF {}
     ;
 
 stmtlist: stmtlist stmt { }
@@ -117,6 +121,7 @@ forStmt: FOR LEFT_PARENTHESIS expr SEMI expr SEMI expr RIGHT_PARENTHESIS stmt { 
     ;
 
 ifStmt: IF LEFT_PARENTHESIS expr RIGHT_PARENTHESIS stmt {}
+    | IF LEFT_PARENTHESIS expr RIGHT_PARENTHESIS CompoundStmt {}
     ;
 
 structStmt: STRUCT ID BLOCK_BEGIN type Assignment BLOCK_END { }

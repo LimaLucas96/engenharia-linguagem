@@ -1,4 +1,8 @@
-int main() inicio
+int main() inicio main
     int teste = 0;
     teste = teste + 1;
-fim
+    se( 1> teste) inicio se 
+        int b;
+        int c; 
+    fim se
+fim main
