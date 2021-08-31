@@ -9,15 +9,21 @@
 
 [ \t]                 ;
 [ \n]                 { yylineno = yylineno + 1;}
-"int"                 {return (INT);}
-"float"               {return (FLOAT);}
-"char"                {return (CHAR);}
-"void"                {return (VOID);}
-"double"              {return (DOUBLE);}
+","                   {return(COMMA);}
+"int"                 {yylval.sValue = strdup(yytext); 
+                       return TYPE;}
+"float"               {yylval.sValue = strdup(yytext); 
+                       return TYPE;}
+"char"                {yylval.sValue = strdup(yytext); 
+                       return TYPE;}
+"void"                {yylval.sValue = strdup(yytext); 
+                       return TYPE;}
+"double"              {yylval.sValue = strdup(yytext); 
+                       return TYPE;}
 "for"                 {return (FOR);}
 "struct"              {return(STRUCT);}
 
-[0-9]+           		  { return NUMBER;}
+[0-9]+           		  { yylval.iValue = atoi(yytext); return NUMBER;}
 "while"      			    {return(WHILE);}
 "inicio"      			  {return(BLOCK_BEGIN);}
 "fim"      			      {return(BLOCK_END);}
@@ -43,7 +49,7 @@
 "["                   {return(LEFT_COCHETE);}
 "]"                   {return(RIGHT_COCHETE);}
 
-[a-zA-Z][a-zA-Z0-9]*	{return ID;}
+[a-zA-Z][a-zA-Z0-9]*	{yylval.sValue = strdup(yytext); return ID;}
 .                       {yyerror("invalid character");}
 
 %%
