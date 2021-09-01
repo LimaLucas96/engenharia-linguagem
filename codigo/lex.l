@@ -37,12 +37,12 @@
 "*"                   {return(TIMES);}
 "/"                   {return(DIVIDE);}
 
+">"                   {return (GT);}
+"<"                   {return (LT);}
 "<="                  {return (LE);}
 ">="                  {return (GE);}
 "=="                  {return (EQ);}
 "!="                  {return (NE);}
-">"                   {return (GT);}
-"<"                   {return (LT);}
 
 "("                   {return(LEFT_PARENTHESIS);}
 ")"                   {return(RIGHT_PARENTHESIS);}
